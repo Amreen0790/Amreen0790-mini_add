@@ -3,77 +3,134 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calc Tools</title>
-  <meta name="description" content="Simple, fast calculators. Start with the mini addition tool." />
+  <title>Mini Addition</title>
+  <meta name="description" content="A tiny, installable addition app in ONE file." />
   <style>
-    :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af; --accent:#22c55e; --border:#1f2937; }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f6f7fb; --card:#ffffff; --text:#111827; --muted:#6b7280; --accent:#0ea5e9; --border:#e5e7eb; }
-    }
+    :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --accent:#22c55e; --border:#1f2937; }
+    @media (prefers-color-scheme: light){ :root { --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --accent:#0ea5e9; --border:#e5e7eb; } }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text)}
-    .wrap{max-width:960px; margin:40px auto; padding:24px}
-    .hero{padding:28px 24px; border:1px solid var(--border); background:var(--card); border-radius:18px; box-shadow:0 14px 40px rgba(0,0,0,.25)}
-    h1{margin:0 0 6px; font-size:28px}
-    p.muted{margin:0; color:var(--muted)}
-    .grid{display:grid; grid-template-columns:repeat(1, minmax(0,1fr)); gap:16px; margin-top:18px}
-    @media (min-width:720px){ .grid{grid-template-columns:repeat(3, minmax(0,1fr));} }
-    .card{display:flex; flex-direction:column; gap:8px; padding:18px; background:var(--card); border:1px solid var(--border); border-radius:16px; text-decoration:none; color:inherit; transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease}
-    .card:hover{transform:translateY(-2px); border-color:var(--accent); box-shadow:0 10px 30px rgba(0,0,0,.15)}
-    .tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted)}
-    .cta{display:inline-flex; align-items:center; gap:8px; margin-top:10px; font-weight:600; color:var(--accent)}
-    .footer{margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
-    .pill{display:inline-block; font-size:12px; border:1px solid var(--border); padding:6px 10px; border-radius:999px; color:var(--muted)}
+    .wrap{max-width:640px; margin:40px auto; padding:24px}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:18px; padding:24px; box-shadow:0 12px 36px rgba(0,0,0,.25)}
+    h1{margin:0 0 6px; font-size:28px;}
+    p.muted{margin:0 0 18px; color:var(--muted)}
+    label{display:block; font-size:14px; color:var(--muted); margin:12px 0 6px}
+    input{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--text); font-size:16px; outline:none}
+    input:focus{border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent)}
+    .result{display:flex; align-items:center; justify-content:space-between; margin-top:14px; padding:14px 16px; background:color-mix(in oklab, var(--border) 25%, transparent); border:1px dashed var(--border); border-radius:12px; font-weight:800; font-size:18px}
     .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    button.toggle{border:1px solid var(--border); background:transparent; color:var(--text); border-radius:12px; padding:8px 12px; cursor:pointer}
+    .btn{flex:1; min-width:120px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+    .status{margin-top:8px; font-size:12px; color:var(--muted)}
+    .foot{margin-top:14px; font-size:12px; color:var(--muted)}
+    .pill{display:inline-block; border:1px solid var(--border); border-radius:999px; padding:4px 10px; margin-left:8px; font-size:12px; color:var(--muted)}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="hero">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-        <div>
-          <h1>Calc Tools</h1>
-          <p class="muted">A tiny toolkit of everyday calculators. Start with the mini addition page.</p>
-        </div>
-        <div class="row">
-          <span class="pill">No sign‑in</span>
-          <span class="pill">Works offline after first load</span>
-        </div>
+    <div class="card">
+      <h1>Mini Addition <span class="pill">Single‑file App</span></h1>
+      <p class="muted">Enter two numbers — the sum updates instantly. Save this page as <code>index.html</code> and host it anywhere.
+      </p>
+
+      <label for="a">First number (A)</label>
+      <input id="a" inputmode="decimal" placeholder="e.g., 12.5" />
+
+      <label for="b">Second number (B)</label>
+      <input id="b" inputmode="decimal" placeholder="e.g., 3" />
+
+      <div class="result"><span>Sum</span><span id="sum">0</span></div>
+
+      <div class="row">
+        <button class="btn" id="swap" title="Swap A and B">Swap A↔B</button>
+        <button class="btn" id="clear" title="Clear inputs">Clear</button>
+        <button class="btn" id="copy" title="Copy result">Copy result</button>
       </div>
+      <div class="status" id="status">Ready</div>
 
-      <div class="grid">
-        <a class="card" href="add.html">
-          <div class="tag">Mini Tool</div>
-          <div style="font-weight:700; font-size:18px">Addition Calculator</div>
-          <div class="muted">Fast A + B with copy, swap, and clear.</div>
-          <div class="cta">Open →</div>
-        </a>
-
-        <div class="card" aria-disabled="true" title="Coming soon">
-          <div class="tag">Coming soon</div>
-          <div style="font-weight:700; font-size:18px">Subtraction</div>
-          <div class="muted">A − B with history & keyboard shortcuts.</div>
-          <div class="cta" style="opacity:.6">In progress</div>
-        </div>
-
-        <div class="card" aria-disabled="true" title="Coming soon">
-          <div class="tag">Coming soon</div>
-          <div style="font-weight:700; font-size:18px">Multiply / Divide</div>
-          <div class="muted">× and ÷ with precision control.</div>
-          <div class="cta" style="opacity:.6">In progress</div>
-        </div>
-      </div>
-
-      <div class="footer">Tip: Host both <code>index.html</code> and <code>add.html</code> in the same GitHub Pages repo. Share <code>/add.html</code> directly.</div>
+      <div class="foot">Installable on mobile/desktop when served over HTTPS.</div>
     </div>
   </div>
 
   <script>
-    // Optional: simple dark/light toggle without storing state
-    const toggle = document.querySelector('button.toggle');
-    // placeholder for future enhancement if you want a manual theme switch
+    // ================= Core logic =================
+    const a = document.getElementById('a');
+    const b = document.getElementById('b');
+    const sumEl = document.getElementById('sum');
+    const statusEl = document.getElementById('status');
+
+    const toNumber = (s) => {
+      if (!s) return 0;               // empty → 0
+      const n = Number(String(s).replace(',', '.'));
+      return Number.isFinite(n) ? n : 0; // invalid → 0
+    };
+
+    function update(){
+      const v = toNumber(a.value) + toNumber(b.value); // ← ADDITION
+      sumEl.textContent = String(v);
+    }
+
+    function flash(msg){
+      statusEl.textContent = msg;
+      clearTimeout(flash._t);
+      flash._t = setTimeout(()=> statusEl.textContent = 'Ready', 1000);
+    }
+
+    a.addEventListener('input', update);
+    b.addEventListener('input', update);
+
+    document.getElementById('swap').addEventListener('click', ()=>{
+      [a.value, b.value] = [b.value, a.value];
+      update();
+      flash('Swapped');
+    });
+    document.getElementById('clear').addEventListener('click', ()=>{
+      a.value = ''; b.value='';
+      update();
+      flash('Cleared');
+    });
+    document.getElementById('copy').addEventListener('click', async ()=>{
+      try { await navigator.clipboard.writeText(sumEl.textContent); flash('Copied'); }
+      catch { flash('Copy unavailable'); }
+    });
+
+    update(); // initial render
+
+    // ================ Single‑file PWA glue ================
+    // Create a manifest.json in memory so we don't need extra files
+    const manifest = {
+      name: 'Mini Addition',
+      short_name: 'Adder',
+      start_url: '.',
+      display: 'standalone',
+      background_color: '#0f172a',
+      theme_color: '#0f172a',
+      icons: [
+        { src: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect rx="24" ry="24" width="128" height="128" fill="%230f172a"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="68" fill="white">+</text></svg>`), sizes: '192x192', type: 'image/svg+xml' }
+      ]
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/manifest+json'});
+    const manifestURL = URL.createObjectURL(manifestBlob);
+    const link = document.createElement('link');
+    link.rel = 'manifest'; link.href = manifestURL; document.head.appendChild(link);
+
+    // Service worker (minimal cache) built on the fly
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        const CACHE='mini-addition-v1';
+        self.addEventListener('install', e=>{
+          e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./'])));
+          self.skipWaiting();
+        });
+        self.addEventListener('activate', e=>self.clients.claim());
+        self.addEventListener('fetch', e=>{
+          e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request)));
+        });
+      `;
+      const swURL = URL.createObjectURL(new Blob([swCode], {type:'text/javascript'}));
+      window.addEventListener('load', ()=> navigator.serviceWorker.register(swURL).catch(()=>{}));
+    }
   </script>
 </body>
 </html>
