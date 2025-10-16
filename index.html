@@ -1,88 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Add Two Numbers</title>
-  <meta name="theme-color" content="#111827">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icons/icon-192.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calc Tools</title>
+  <meta name="description" content="Simple, fast calculators. Start with the mini addition tool." />
   <style>
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(#0f172a,#1f2937);color:#e5e7eb}
-    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:100%;max-width:420px;background:rgba(15,23,42,.75);border:1px solid rgba(148,163,184,.2);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.3);padding:20px}
-    .title{margin:0 0 6px;font-weight:700;font-size:28px}
-    .subtitle{margin:0 0 18px;color:#cbd5e1;font-size:13px}
-    .label{font-size:12px;color:#cbd5e1;margin-bottom:6px}
-    input{width:100%;padding:12px 14px;border-radius:14px;background:#1f2937;border:1px solid #374151;color:#e5e7eb;outline:none}
-    input:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.35)}
-    .row{display:grid;gap:12px}
-    .btns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-    button{padding:10px 12px;border-radius:14px;border:none;background:#6366f1;color:white;font-weight:600}
-    button:active{transform:translateY(1px)}
-    .result{margin-top:12px;padding:14px;border-radius:14px;background:#1f2937;border:1px solid #374151}
-    .hint{margin-top:8px;color:#94a3b8;font-size:12px}
-    footer{margin-top:12px;text-align:center;color:#94a3b8;font-size:11px}
-    kbd{background:#111827;padding:2px 6px;border-radius:6px;border:1px solid #374151}
+    :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af; --accent:#22c55e; --border:#1f2937; }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f6f7fb; --card:#ffffff; --text:#111827; --muted:#6b7280; --accent:#0ea5e9; --border:#e5e7eb; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text)}
+    .wrap{max-width:960px; margin:40px auto; padding:24px}
+    .hero{padding:28px 24px; border:1px solid var(--border); background:var(--card); border-radius:18px; box-shadow:0 14px 40px rgba(0,0,0,.25)}
+    h1{margin:0 0 6px; font-size:28px}
+    p.muted{margin:0; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:repeat(1, minmax(0,1fr)); gap:16px; margin-top:18px}
+    @media (min-width:720px){ .grid{grid-template-columns:repeat(3, minmax(0,1fr));} }
+    .card{display:flex; flex-direction:column; gap:8px; padding:18px; background:var(--card); border:1px solid var(--border); border-radius:16px; text-decoration:none; color:inherit; transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease}
+    .card:hover{transform:translateY(-2px); border-color:var(--accent); box-shadow:0 10px 30px rgba(0,0,0,.15)}
+    .tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted)}
+    .cta{display:inline-flex; align-items:center; gap:8px; margin-top:10px; font-weight:600; color:var(--accent)}
+    .footer{margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
+    .pill{display:inline-block; font-size:12px; border:1px solid var(--border); padding:6px 10px; border-radius:999px; color:var(--muted)}
+    .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    button.toggle{border:1px solid var(--border); background:transparent; color:var(--text); border-radius:12px; padding:8px 12px; cursor:pointer}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
-      <h1 class="title">Add Two Numbers</h1>
-      <p class="subtitle">Tiny offline-friendly calculator you can install</p>
-      <div class="row">
-        <label class="label" for="a">First number</label>
-        <input id="a" type="text" inputmode="decimal" placeholder="e.g., 12.5">
+    <div class="hero">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+        <div>
+          <h1>Calc Tools</h1>
+          <p class="muted">A tiny toolkit of everyday calculators. Start with the mini addition page.</p>
+        </div>
+        <div class="row">
+          <span class="pill">No sign‑in</span>
+          <span class="pill">Works offline after first load</span>
+        </div>
       </div>
-      <div class="row" style="margin-top:10px">
-        <label class="label" for="b">Second number</label>
-        <input id="b" type="text" inputmode="decimal" placeholder="e.g., 7">
+
+      <div class="grid">
+        <a class="card" href="add.html">
+          <div class="tag">Mini Tool</div>
+          <div style="font-weight:700; font-size:18px">Addition Calculator</div>
+          <div class="muted">Fast A + B with copy, swap, and clear.</div>
+          <div class="cta">Open →</div>
+        </a>
+
+        <div class="card" aria-disabled="true" title="Coming soon">
+          <div class="tag">Coming soon</div>
+          <div style="font-weight:700; font-size:18px">Subtraction</div>
+          <div class="muted">A − B with history & keyboard shortcuts.</div>
+          <div class="cta" style="opacity:.6">In progress</div>
+        </div>
+
+        <div class="card" aria-disabled="true" title="Coming soon">
+          <div class="tag">Coming soon</div>
+          <div style="font-weight:700; font-size:18px">Multiply / Divide</div>
+          <div class="muted">× and ÷ with precision control.</div>
+          <div class="cta" style="opacity:.6">In progress</div>
+        </div>
       </div>
-      <div class="btns">
-        <button id="swap" title="Swap inputs">Swap</button>
-        <button id="clear" title="Clear inputs">Clear</button>
-        <button id="copy" title="Copy result">Copy</button>
-      </div>
-      <div class="result">
-        <div class="label" style="margin:0">Result</div>
-        <div id="sum" style="font-size:34px;font-weight:700;word-break:break-all">—</div>
-        <div id="status" class="hint">Ready</div>
-      </div>
-      <details class="hint">
-        <summary>Tips</summary>
-        <ul>
-          <li>Works with negative and decimal numbers (dot or comma).</li>
-          <li>Swap quickly with the <kbd>Swap</kbd> button.</li>
-          <li>Copy the result to paste anywhere.</li>
-        </ul>
-      </details>
-      <footer>No data leaves your device.</footer>
+
+      <div class="footer">Tip: Host both <code>index.html</code> and <code>add.html</code> in the same GitHub Pages repo. Share <code>/add.html</code> directly.</div>
     </div>
   </div>
 
   <script>
-    const a = document.getElementById('a');
-    const b = document.getElementById('b');
-    const sumEl = document.getElementById('sum');
-    const statusEl = document.getElementById('status');
-    const isValid = v => /^-?\d*(?:[.,]?\d*)?$/.test(v);
-    const parse = v => v.trim()==='' ? 0 : Number(v.replace(',', '.'));
-    function update(){
-      const v = parse(a.value) + parse(b.value);
-      sumEl.textContent = Number.isFinite(v) ? String(v) : '—';
-    }
-    function flash(msg, t=1000){ statusEl.textContent = msg; setTimeout(()=>statusEl.textContent='Ready', t); }
-    a.addEventListener('input', e=>{ if(isValid(e.target.value.replace(',', '.'))) update(); else e.target.value = e.target.value.slice(0,-1); });
-    b.addEventListener('input', e=>{ if(isValid(e.target.value.replace(',', '.'))) update(); else e.target.value = e.target.value.slice(0,-1); });
-    document.getElementById('swap').onclick = ()=>{ const av=a.value; a.value=b.value; b.value=av; update(); flash('Swapped'); };
-    document.getElementById('clear').onclick = ()=>{ a.value=''; b.value=''; update(); flash('Cleared'); };
-    document.getElementById('copy').onclick = async()=>{ try{ await navigator.clipboard.writeText(sumEl.textContent); flash('Copied', 1200);}catch{ flash('Copy not available',1500);} };
-    update();
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
-    }
+    // Optional: simple dark/light toggle without storing state
+    const toggle = document.querySelector('button.toggle');
+    // placeholder for future enhancement if you want a manual theme switch
   </script>
 </body>
 </html>
